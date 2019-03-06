@@ -1,0 +1,71 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `__tmpl__BLD_WRK_TableName`()
+BEGIN
+-- ====================================
+-- Author:
+-- Date Created:  YYYYMMDD
+-- Description: RAW -> WRK
+-- Modified:
+-- ====================================
+
+-- ====================================
+-- DROP TABLE
+-- ====================================
+DROP TABLE IF EXISTS `WRK_TableName`;
+
+-- ====================================
+-- CREATE TABLE
+-- ====================================
+CREATE TABLE `WRK_TableName`
+	(
+		RowNumber INTEGER AUTO_INCREMENT
+		,AAAA VARCHAR(10)
+        ,BBBB VARCHAR(100)
+        ,CCCC DATE
+        ,DDDD DECIMAL(10,2)
+        ,EEEE INTEGER
+	);
+
+-- ====================================
+-- TRUNCATE TABLE
+-- ====================================
+TRUNCATE TABLE `WRK_TableName`;
+
+-- ====================================
+-- INSERT INTO
+-- ====================================
+INSERT INTO `WRK_TableName`
+	(
+		AAAA
+        ,BBBB
+        ,CCCC
+        ,DDDD
+        ,EEEE
+	)
+SELECT
+	xAAAA
+	,xBBBB
+	,CAST(xCCCC AS DATE)
+	,CONVERT(xDDDD, DECIMAL(10,3))
+	,xEEEE
+FROM `RAW_TableName_YYYYMMDD`;
+/*
+-- FILTERS:
+WHERE
+-- CONDITION 1
+-- AND CONDITION 2
+
+-- (x row(s) returned)
+*/
+
+-- ====================================
+-- ADDITIONAL EXCLUSIONS
+-- ====================================
+/*
+DELETE
+FROM `WRK_TableName`
+WHERE CONDITION;
+-- (x row(s) affected)
+*/
+
+END$$
